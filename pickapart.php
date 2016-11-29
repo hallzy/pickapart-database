@@ -6,12 +6,25 @@ echo "<br>";
 echo "<br>";
 echo "To use this, append \"?query=\" to the url followed by your sql query";
 echo "<br>";
+echo "Example \"stmhall.ca/pickapart.php?query=select * from cars";
+echo "<br>";
+echo "<br>";
+echo "Note: This webserver has a security feature that seems to block some SQL";
+echo "commands in the URL. To get around this some keywords need to be";
+echo "modified to be entered into this URL. The following is a list of";
+echo "modified keywords:";
+echo "<br>";
+echo "<strong>\"HAVING\"</strong> is now <strong>\"HAVIN\"</strong>";
+echo "<br>";
+echo "<strong>\"UNION\"</strong> is now <strong>\"UNYON\"</strong>";
+echo "<br>";
 echo "<br>";
 echo "The only table to query from is \"cars\"";
 echo "<br>";
 echo "For example, the default query is:";
 echo "<br>";
 echo "    SELECT * FROM cars ORDER BY make, model, year desc";
+echo "<br>";
 
 /* Login for the default user of the database. */
 /* This just authenticates database users. Since this is a public facing */
@@ -35,6 +48,14 @@ $query = $_GET['query'];
 if ($query == '') {
     $query = "select * from cars order by make, model, year desc";
 }
+
+$query = str_replace ('unyon', 'union', $query);
+$query = str_replace ('havin', 'having', $query);
+
+echo "<br>";
+echo "Your Query:";
+echo "<br>";
+echo "$query";
 
 $result = mysqli_query($con,$query);
 
