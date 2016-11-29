@@ -254,5 +254,7 @@ done
 #}}}
 done
 
+mysqldump master_pickapart > pickapart.sql
+
 unset IFS
 set +f
