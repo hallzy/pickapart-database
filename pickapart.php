@@ -43,7 +43,7 @@ $result = mysqli_query($con,$query);
 /* If we are looking for * then we don't care */
 /* Make the query lowercase for easier parsing */
 $mystring = strtolower($query);
-if (strpos($mystring, "*") == false) {
+if (strpos($mystring, " * ") == false) {
   /* Remove everything after "from" */
   $mystring = explode(" from", $mystring);
   /* Remove "select" */
@@ -52,16 +52,25 @@ if (strpos($mystring, "*") == false) {
   $mystring = $mystring[1];
   /* split by commas, if they exist */
   if (strpos($mystring, ",") != false) {
-      $mystring = explode(", ", $mystring);
+      $mystring = explode(",", $mystring);
   }
+
 
   /* We now have an array of each element being selected. Just need to check */
   /* if they have the "as" keyword */
   for ($i=0; $i<count($mystring); $i++) {
     /* split by commas, if they exist */
-    if (strpos($mystring[$i], "as") != false) {
-      $mystring[$i] = explode("as ", $mystring[$i]);
-      $mystring[$i] = $mystring[$i][1];
+    if (count($mystring) == 1) {
+      if (strpos($mystring, "as") != false) {
+        $mystring = explode("as ", $mystring);
+        $mystring = $mystring[1];
+      }
+    }
+    else {
+      if (strpos($mystring[$i], "as") != false) {
+        $mystring[$i] = explode("as ", $mystring[$i]);
+        $mystring[$i] = $mystring[$i][1];
+      }
     }
   }
 }
@@ -74,7 +83,12 @@ else {
 
 echo "<table border='1'><tr>";
 for ($i=0; $i<count($mystring); $i++) {
-  $label = $mystring[$i];
+  if (count($mystring) == 1) {
+    $label = $mystring;
+  }
+  else {
+    $label = $mystring[$i];
+  }
   $label = str_replace (' ', '', $label);
   echo "<th>$label</th>";
 }
@@ -83,7 +97,12 @@ echo "</tr>";
 while ($row    = mysqli_fetch_assoc($result)) {
   echo "<tr>";
   for ($i=0; $i<count($mystring); $i++) {
-    $label = $mystring[$i];
+    if (count($mystring) == 1) {
+      $label = $mystring;
+    }
+    else {
+      $label = $mystring[$i];
+    }
     $label = str_replace (' ', '', $label);
     echo "<td>" . $row[$label] . "</td>";
   }
