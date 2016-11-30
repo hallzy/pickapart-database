@@ -12,3 +12,5 @@ data into the database.
 
 The files that have `stmhall` in the file name are used for my website where I
 also have the database for public access.
+
+The `pickapart.php` file is also used for the website.
