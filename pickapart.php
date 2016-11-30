@@ -1,7 +1,9 @@
 <?php
 
-$update_date = "5:00pm PST November 28th 2016";
-echo "Last Updated: $update_date";
+echo "This database is automatically updated twice a day (12pm and 12am)";
+echo "<br>";
+echo "Wait a few minutes after these times to ensure that the database has";
+echo " been fully populated before making a query.";
 echo "<br>";
 echo "<br>";
 echo "To use this, append \"?query=\" to the url followed by your sql query";
@@ -10,9 +12,9 @@ echo "Example \"stmhall.ca/pickapart.php?query=select * from cars";
 echo "<br>";
 echo "<br>";
 echo "Note: This webserver has a security feature that seems to block some SQL";
-echo "commands in the URL. To get around this some keywords need to be";
-echo "modified to be entered into this URL. The following is a list of";
-echo "modified keywords:";
+echo " commands in the URL. To get around this some keywords need to be";
+echo " modified to be entered into this URL. The following is a list of";
+echo " modified keywords:";
 echo "<br>";
 echo "<strong>\"HAVING\"</strong> is now <strong>\"HAVIN\"</strong>";
 echo "<br>";
@@ -23,7 +25,7 @@ echo "The only table to query from is \"cars\"";
 echo "<br>";
 echo "For example, the default query is:";
 echo "<br>";
-echo "    SELECT * FROM cars ORDER BY make, model, year desc";
+echo "SELECT * FROM cars ORDER BY make, model, year desc";
 echo "<br>";
 
 /* Login for the default user of the database. */
