@@ -1,6 +1,7 @@
 <?php
 
-echo "This database is automatically updated twice a day (12pm and 12am)";
+echo "This database is automatically updated twice a day (12pm and 12am";
+echo " Eastern)";
 echo "<br>";
 echo "Wait a few minutes after these times to ensure that the database has";
 echo " been fully populated before making a query.";
