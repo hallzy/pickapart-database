@@ -56,11 +56,19 @@ $query = str_replace ('unyon', 'union', $query);
 $query = str_replace ('havin', 'having', $query);
 
 echo "<br>";
-echo "Your Query:";
-echo "<br>";
-echo "$query";
+echo "Your Query: <strong>$query</strong>";
 
 $result = mysqli_query($con,$query);
+
+$num_rows = mysqli_num_rows($result);
+
+echo "<br>";
+if ($num_rows != false) {
+  echo "Which resulted in <strong>$num_rows</strong> rows.";
+}
+else {
+  echo "Query <strong>Failed</strong>";
+}
 
 
 /* Need to get the names of the headings */
