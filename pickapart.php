@@ -79,6 +79,12 @@ $num_rows = mysqli_num_rows($result);
 echo "<br>";
 if ($num_rows != false) {
   echo "Which resulted in <strong>$num_rows</strong> rows.";
+echo "<br>";
+  echo "<a href=\"pickapart_table.php?query=$query\">Table</a>";
+  echo "&nbsp;&nbsp;&nbsp;";
+  echo "<a href=\"pickapart_json.php?query=$query\">JSON</a>";
+  echo "&nbsp;&nbsp;&nbsp;";
+  echo "<a href=\"pickapart_csv.php?query=$query\">CSV</a>";
 }
 else {
   echo "Query <strong>Failed</strong>";
