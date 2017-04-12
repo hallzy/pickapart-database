@@ -29,11 +29,6 @@ $result = mysqli_query($con,$query);
 
 $num_rows = mysqli_num_rows($result);
 
-if ($num_rows == false) {
-  echo "Query <strong>Failed</strong>";
-}
-
-
 /* Need to get the names of the headings */
 /* If we are looking for * then we don't care */
 /* Make the query lowercase for easier parsing */
