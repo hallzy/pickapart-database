@@ -77,7 +77,6 @@ else {
 
 
 while ($row    = mysqli_fetch_assoc($result)) {
-  /* echo "<tr>"; */
   for ($i=0; $i<count($mystring); $i++) {
     if (count($mystring) == 1) {
       $label = $mystring;
