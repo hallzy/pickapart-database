@@ -10,7 +10,7 @@
 
 <?php
 
-echo "This database is automatically updated every hour on the hour";
+echo "This database is automatically updated every hour on the half hour";
 echo " Eastern)";
 echo "<br>";
 echo "Wait a few minutes after these times to ensure that the database has";
