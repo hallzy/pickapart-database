@@ -15,6 +15,8 @@ mysql << EOF
 source create-table.sql
 EOF
 
+echo "Create Table Done"
+
 # Get master list of car models#{{{
 model_list="cars-to-find"
 flag=0
@@ -131,6 +133,8 @@ sed -i "s@</tr>@@g" car_details
 # Populate Arrays for the data for the new cars#{{{
 
 # Open "${CAR}_tdtags_latest_cars"
+declare -a PIC_URLS
+declare -a COUNT_OF_CAR_FOR_PIC
 declare -a DATE_ADDED
 declare -a CAR_MAKE
 declare -a CAR_MODEL
@@ -141,6 +145,7 @@ declare -a CAR_TRANSMISSION
 declare -a CAR_DESCRIPTION
 declare -a CAR_ROW
 declare -a CAR_STOCK_NUMBERS
+let pic_urls_count=0
 let date_added_count=0
 let car_make_count=0
 let car_model_count=0
@@ -154,6 +159,30 @@ let car_stock_array_count=0
 
 # CAR_ARRAY now contains all the car information for ${CAR}s.
 # Note that bash does not have 2D arrays, so it is stored in a 1D array.
+
+exec 10<&0
+fileName="car_details"
+exec < "$fileName"
+
+let count=0
+let current_car=0
+let skip=10
+while read LINE; do
+  if (( skip < 10 )); then
+    ((skip++))
+  # Get date added
+  elif [[ $LINE =~ "http" ]] ; then
+    PIC_URLS[$pic_urls_count]=$LINE
+    COUNT_OF_CAR_FOR_PIC[$pic_urls_count]=$current_car
+    ((pic_urls_count++))
+  # skip
+  else
+    skip=1
+    ((current_car++))
+  fi
+  ((count++))
+done
+exec 0<&10 10<&-
 
 # Delete all lines containing "http"
 sed -i '/http/d' car_details
@@ -247,6 +276,16 @@ ${CAR_YEAR[$i]},
 );
 EOF
 
+done
+
+for((i=0;i<pic_urls_count;i++)); do
+mysql << EOF
+use master_pickapart;
+insert into pics values (
+'${PIC_URLS[$i]}',
+'${CAR_STOCK_NUMBERS[${COUNT_OF_CAR_FOR_PIC[$i]}]}'
+);
+EOF
 done
 
 #}}}

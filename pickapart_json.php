@@ -19,11 +19,8 @@ $query = $_GET['query'];
 
 /* Default query */
 if ($query == '') {
-    $query = "select * from cars order by make, model, year desc";
+    $query = "select * from lot order by make, model, year desc";
 }
-
-$query = str_replace ('unyon', 'union', $query);
-$query = str_replace ('havin', 'having', $query);
 
 $result = mysqli_query($con,$query);
 
@@ -65,8 +62,9 @@ if (strpos($mystring, " * ") == false) {
   }
 }
 else {
-    $mystring = array("date_added", "make", "model", "year", "body_style",
-                      "engine", "transmission", "description", "row", "stock");
+  $mystring = array("urls", "date_added", "make", "model", "year",
+                    "body_style", "engine", "transmission", "description",
+                    "row", "stock");
 
 }
 

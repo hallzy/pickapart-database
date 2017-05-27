@@ -19,28 +19,19 @@ echo "<br>";
 echo "<br>";
 echo "To use this, append \"?query=\" to the url followed by your sql query";
 echo "<br>";
-echo "Example \"stmhall.ca/pickapart.php?query=select * from cars";
+echo "Example \"stmhall.ca/pickapart.php?query=select * from lot";
 echo "<br>";
-echo "<br>";
-echo "Note: This webserver has a security feature that seems to block some SQL";
-echo " commands in the URL. To get around this some keywords need to be";
-echo " modified to be entered into this URL. The following is a list of";
-echo " modified keywords:";
-echo "<br>";
-echo "<strong>\"HAVING\"</strong> is now <strong>\"HAVIN\"</strong>";
-echo "<br>";
-echo "<strong>\"UNION\"</strong> is now <strong>\"UNYON\"</strong>";
 echo "<br>";
 echo "<strong>\"%\"</strong> is now <strong>\"%25\"</strong>. This is because";
 echo " URLs use the \"%\" sign to denote special characters, and it so happens";
 echo " that \"%25\" is the code for a \"%\" sign";
 echo "<br>";
 echo "<br>";
-echo "The only table to query from is \"cars\"";
+echo "The tables to  query from are \"cars\", \"pics\", and \"lot\"";
 echo "<br>";
 echo "For example, the default query is:";
 echo "<br>";
-echo "SELECT * FROM cars ORDER BY make, model, year desc";
+echo "SELECT * FROM lot ORDER BY make, model, year desc";
 echo "<br>";
 
 /* Login for the default user of the database. */
@@ -63,11 +54,8 @@ $query = $_GET['query'];
 
 /* Default query */
 if ($query == '') {
-    $query = "select * from cars order by make, model, year desc";
+    $query = "select * from lot order by make, model, year desc";
 }
-
-$query = str_replace ('unyon', 'union', $query);
-$query = str_replace ('havin', 'having', $query);
 
 echo "<br>";
 echo "Your Query: <strong>$query</strong>";
@@ -127,8 +115,9 @@ if (strpos($mystring, " * ") == false) {
   }
 }
 else {
-    $mystring = array("date_added", "make", "model", "year", "body_style",
-                      "engine", "transmission", "description", "row", "stock");
+  $mystring = array("urls", "date_added", "make", "model", "year",
+                    "body_style", "engine", "transmission", "description",
+                    "row", "stock");
 
 }
 
