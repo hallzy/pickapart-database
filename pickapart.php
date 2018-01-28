@@ -145,7 +145,19 @@ while ($row    = mysqli_fetch_assoc($result)) {
       $label = $mystring[$i];
     }
     $label = str_replace (' ', '', $label);
-    echo "<td>" . $row[$label] . "</td>";
+    /* If is the URLs section then we want to convert the urls into links */
+    if ($label == "urls" && $row[$label] != "") {
+      $urls = explode(" ", $row[$label]);
+      for ($j=0; $j<count($urls); $j++) {
+        $x = $j + 1;
+        $urls[$j] = "<a href=\"" . $urls[$j] . "\">" . $x . ".jpg</a>";
+      }
+      $url_list = implode(", ", $urls);
+      echo "<td>" . $url_list . "</td>";
+    }
+    else {
+      echo "<td>" . $row[$label] . "</td>";
+    }
   }
   echo "</tr>";
 }
