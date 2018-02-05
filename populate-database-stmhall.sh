@@ -17,7 +17,8 @@ ARGS_FILE=arguments_for_script
 # If the arguments file exists then read the file and get the arguments, and
 # insert them into the ncftpput command
 if [ -e "$ARGS_FILE" ]; then
-  # This is a file with three arguments that will be filled into the script below.
+  # This is a file with three arguments that will be filled into the script
+  # below.
   readarray -t ARGUMENTS < $ARGS_FILE
 
   #Username
@@ -87,7 +88,7 @@ dos2unix car_details
 # vehicles
 sed -i '$!N;s/\n\s*<\/td>/<\/td>/;P;D' car_details
 
-# Remove all lines from html that are not necessary at all (before the parts we don't need, and after)#{{{
+# Remove all lines from HTML that are not necessary at all (before the parts we don't need, and after)#{{{
 
 # Open ${CAR}_list_html
 declare -a ARRAY
@@ -130,11 +131,11 @@ done
 sed -i "s@</td>@</td>\n@g" car_details
 
 
-# Put urls on there on lines
+# Put URLs on there on lines
 sed -i "s@http@\nhttp@g" car_details | sed -in "s/\(^http[s]*:[a-Z0-9/.=?_-]*\)\(.*\)/\1/p"
 # Delete all lines containing <tr bgcolor=
 sed -i '/<tr bgcolor=/d' car_details
-# Delete everything after the url on the line
+# Delete everything after the URL on the line
 sed -i 's/JPG.*/JPG/' car_details
 
 # remove "<td>" from each line
@@ -302,7 +303,6 @@ insert into pics values (
 );
 EOF
 done
-
 
 #}}}
 

@@ -17,7 +17,7 @@ echo "Wait a few minutes after these times to ensure that the database has";
 echo " been fully populated before making a query.";
 echo "<br>";
 echo "<br>";
-echo "To use this, append \"?query=\" to the url followed by your sql query";
+echo "To use this, append \"?query=\" to the URL followed by your SQL query";
 echo "<br>";
 echo "Example \"stmhall.ca/pickapart.php?query=select * from lot";
 echo "<br>";
@@ -145,7 +145,7 @@ while ($row    = mysqli_fetch_assoc($result)) {
       $label = $mystring[$i];
     }
     $label = str_replace (' ', '', $label);
-    /* If is the URLs section then we want to convert the urls into links */
+    /* If is the URLs section then we want to convert the URLs into links */
     if ($label == "urls" && $row[$label] != "") {
       $urls = explode(" ", $row[$label]);
       for ($j=0; $j<count($urls); $j++) {
