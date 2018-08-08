@@ -188,7 +188,8 @@ while read LINE; do
     ((skip++))
   # Get date added
   elif [[ $LINE =~ "http" ]] ; then
-    PIC_URLS[$pic_urls_count]=$LINE
+    basename=$(basename "$LINE")
+    PIC_URLS[$pic_urls_count]="<a href='$LINE'>$basename</a>"
     COUNT_OF_CAR_FOR_PIC[$pic_urls_count]=$current_car
     ((pic_urls_count++))
   # skip
